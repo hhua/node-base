@@ -68,3 +68,4 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-connect'
 
   grunt.registerTask 'default', ['clean:build', 'copy', 'stylus', 'cssmin', 'coffee', 'coffeelint', 'uglify', 'watch']
+  

@@ -1,5 +1,4 @@
 express = require('express')
-mustache = require('mustache')
 engines = require('consolidate')
 path = require 'path'
 
