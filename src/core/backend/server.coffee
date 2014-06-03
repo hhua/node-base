@@ -1,8 +1,8 @@
-express = require('express')
-engines = require('consolidate')
+express = require 'express'
+engines = require 'consolidate'
 path = require 'path'
 
-start = (route, handle) ->
+start = (route, handle, cluster) ->
   app = express()
 
   app.engine 'html', engines.hogan
@@ -16,6 +16,6 @@ start = (route, handle) ->
   app.use express.static('./dest/core/frontend')
   port = process.env.PORT ? 3000
   app.listen port
-  console.log('Listening on port ' + port)
+  console.log('Listening on port ' + port + ' of worker ' + cluster.worker.id)
 
 module.exports.start = start
