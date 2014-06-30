@@ -1,6 +1,7 @@
-server = require("./core/backend/server")
-router = require("./core/backend/router")
-requestHandlers = require("./core/backend/requestHandlers")
+require './core/globals'
+server = requireRoot("./core/backend/server")
+router = requireRoot("./core/backend/router")
+requestHandlers = requireRoot("./core/backend/requestHandlers")
 
 handle =
   "/": requestHandlers.main

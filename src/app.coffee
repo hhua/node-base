@@ -1,3 +1,4 @@
+require './core/globals'
 clusterMaster = require 'cluster-master'
 
 clusterMaster
