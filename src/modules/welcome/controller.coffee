@@ -4,4 +4,6 @@ main = (req, res) ->
     res.set('Content-Type', 'text/html')
     res.send(new Buffer(html))
 
-module.exports.main = main
+module.exports = {
+  main
+}

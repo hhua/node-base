@@ -8,4 +8,6 @@ route = (handle, pathname, request, response) ->
     response.write "404 Not Found"
     response.end()
 
-module.exports.route = route
+module.exports = {
+  route
+}

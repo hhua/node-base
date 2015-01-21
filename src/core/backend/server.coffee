@@ -5,7 +5,12 @@ cookieParser = require 'cookie-parser'
 bodyParser = require 'body-parser'
 logger = require 'morgan'
 
-start = (route, handle, process) ->
+welcomeController = requireRoot "modules/welcome/controller"
+
+handle =
+  "/": welcomeController.main
+
+start = (route, process) ->
   app = express()
 
   app.engine 'html', engines.hogan
@@ -13,9 +18,11 @@ start = (route, handle, process) ->
   app.set 'view engine', 'html'
   app.set 'views', path.join(__dirname, '../frontend')
 
-  app.use logger('dev')
+  app.use logger('combined')
   app.use cookieParser()
-  app.use bodyParser()
+  app.use bodyParser.urlencoded({ extended: false })
+  app.use bodyParser.json()
+
   app.use express.static('/dest/core/frontend')
 
   app.get '/', (req, res) ->
@@ -25,4 +32,6 @@ start = (route, handle, process) ->
   app.listen port
   console.log('Listening on port ' + port + ' of worker ' + process.pid)
 
-module.exports.start = start
+module.exports = {
+  start
+}

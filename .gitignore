@@ -1,6 +1,7 @@
 # project folders #
 ###################
 dest
+*.swp
 
 # Node file #
 #############
