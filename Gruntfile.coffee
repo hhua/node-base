@@ -10,12 +10,29 @@ module.exports = (grunt) ->
           ext: '.js'
         ]
     coffeelint:
-      app: 'src/**/*.coffee'
+      app: ['src/**/*.coffee', "Gruntfile.coffee"]
+      options:
+        configFile: 'coffeelint.json'
     copy:
-      build:
+      templates:
         cwd: 'src'
         src: '**/*.html'
         dest: 'dest'
+        expand: true
+      scripts:
+        cwd: 'src/core/frontend/vendor'
+        src: [ '**/*.js']
+        dest: 'dest/public/vendor'
+        expand: true
+      styles:
+        cwd: 'src/core/frontend/vendor'
+        src: '**/*.css'
+        dest: 'dest/public/vendor'
+        expand: true
+      fonts:
+        cwd: 'src/core/frontend/vendor'
+        src: [ '**/*.eot', '**/*.svg', '**/*.ttf', '**/*.woff', '**/*.woff2' ]
+        dest: 'dest/public/vendor'
         expand: true
     clean:
       build:
@@ -23,7 +40,7 @@ module.exports = (grunt) ->
       styles:
         src: [ 'dest/**/*.css', '!dest/public/assets/styles/application.css' ]
       scripts:
-        src: [ 'dest/**/*.js', '!dest/public/assets/js/application.js' ]
+        src: [ 'dest/**/*.js', '!dest/public/assets/scripts/application.js' ]
     stylus:
       build:
         options:
@@ -39,13 +56,13 @@ module.exports = (grunt) ->
     cssmin:
       build:
         files:
-          'dest/public/assets/styles/application.css': [ 'dest/**/frontend/**/*.css' ]
+          'dest/public/assets/styles/application.min.css': [ 'dest/core/frontend/styles/main.css' ]
     uglify:
       build:
         options:
           mangle: false
         files:
-          'dest/public/assets/js/application.js': [ 'dest/**/frontend/**/*.js' ]
+          'dest/public/assets/scripts/application.min.js': [ 'dest/**/frontend/**/*.js' ]
     connect:
       server:
         options:
@@ -53,8 +70,8 @@ module.exports = (grunt) ->
           base: 'dest'
           hostname: '*'
     watch:
-      files: ['Gruntfile.coffee', 'src/**/*.coffee', 'src/**/*.styl', 'src/**/*.html']
-      tasks: ['stylus', 'cssmin', 'coffee', 'coffeelint', 'uglify', 'copy']
+      files: ['Gruntfile.coffee', 'src/**/*.coffee', 'src/**/*.styl', 'src/**/*.html', 'src/**/*.js']
+      tasks: ['stylus', 'cssmin', 'coffeelint', 'coffee', 'uglify', 'copy']
 
   grunt.loadNpmTasks 'grunt-coffeelint'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
@@ -67,4 +84,5 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-connect'
 
-  grunt.registerTask 'default', ['clean:build', 'copy', 'stylus', 'cssmin', 'coffee', 'coffeelint', 'uglify']
+  grunt.registerTask 'default', ['clean:build', 'stylus', 'cssmin', 'coffeelint', 'coffee', 'uglify', 'copy']
+

@@ -12,7 +12,7 @@ usage:
 	@echo 'make reset                                       : Reinstall all necessary dependencies'
 	@echo ''
 
-NPM_ARGS = --registry http://registry.npmjs.org
+NPM_ARGS = --registry https://registry.npmjs.org
 setup:
 	npm $(NPM_ARGS) install
 
