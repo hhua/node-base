@@ -5,10 +5,10 @@ cookieParser = require 'cookie-parser'
 bodyParser = require 'body-parser'
 logger = require 'morgan'
 
-welcomeController = requireRoot "modules/welcome/controller"
+helloController = requireRoot "modules/hello/controller"
 
 handle =
-  "/": welcomeController.main
+  "/": helloController.main
 
 start = (route, process) ->
   app = express()
@@ -16,14 +16,14 @@ start = (route, process) ->
   app.engine 'html', engines.hogan
 
   app.set 'view engine', 'html'
-  app.set 'views', path.join(__dirname, '../frontend')
+  app.set 'views', path.join(__dirname, '../../')
 
   app.use logger('combined')
   app.use cookieParser()
   app.use bodyParser.urlencoded({ extended: false })
   app.use bodyParser.json()
 
-  app.use express.static('/dest/core/frontend')
+  app.use express.static(path.join(__dirname, '../../public'))
 
   app.get '/', (req, res) ->
     route(handle, '/', req, res)
