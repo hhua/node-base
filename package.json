@@ -2,7 +2,7 @@
   "name": "node-base",
   "description": "Node Bootstrap project",
   "author": "Han Hua (http://hhua.github.io)",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": false,
   "dependencies": {
     "backbone": "~1.1.2",
@@ -23,7 +23,7 @@
     "npm": "2.1.x"
   },
   "scripts": {
-    "test": ""
+    "test": "make test"
   },
   "devDependencies": {
     "cluster-master": "^0.2.0",
@@ -37,6 +37,8 @@
     "grunt-contrib-cssmin": "~0.11.0",
     "grunt-contrib-stylus": "~0.20.0",
     "grunt-contrib-uglify": "~0.4.0",
-    "grunt-contrib-watch": "~0.6.1"
+    "grunt-contrib-watch": "~0.6.1",
+    "mocha": "*",
+    "should": "*"
   }
 }
