@@ -5,11 +5,6 @@ cookieParser = require 'cookie-parser'
 bodyParser = require 'body-parser'
 logger = require 'morgan'
 
-helloController = requireRoot "modules/hello/controller"
-
-handle =
-  "/": helloController.main
-
 start = (route, process) ->
   app = express()
 
@@ -25,8 +20,7 @@ start = (route, process) ->
 
   app.use express.static(path.join(__dirname, '../../public'))
 
-  app.get '/', (req, res) ->
-    route(handle, '/', req, res)
+  requireRoot('core/routes')(app)
 
   port = process.env.PORT ? 3000
   app.listen port

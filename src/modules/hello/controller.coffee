@@ -5,8 +5,6 @@ main = (req, res) ->
 
   res.render 'modules/hello/index', { hello: "hello" }, (err, helloHtml) ->
     bodyHash = { body: helloHtml }
-    console.log '#######', err
-    console.log '#######', helloHtml
 
     res.render 'core/frontend/index', bodyHash, (err, html) ->
       res.set('Content-Type', 'text/html')
